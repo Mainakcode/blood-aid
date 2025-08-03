@@ -1,0 +1,74 @@
+/* style.css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #f4f4f4;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #c62828;
+  margin-bottom: 30px;
+}
+
+section {
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+label, input, select, button {
+  display: block;
+  margin: 10px 0;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+input, select {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 10px;
+  background-color: #c62828;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #b71c1c;
+}
+
+#results {
+  margin-top: 20px;
+}
+
+.donor-card {
+  background: #ffecec;
+  border: 1px solid #ff9a9a;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.donor-card h3 {
+  margin: 0 0 10px 0;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+  label, input, select, button {
+    width: 100%;
+  }
+}
