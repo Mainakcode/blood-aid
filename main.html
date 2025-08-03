@@ -1,0 +1,84 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BloodLink - Realtime Donor Finder</title>
+  <link rel="stylesheet" href="style.css" />
+ <!-- Firebase App (Core SDK) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+
+<!-- Firebase Realtime Database SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
+<!-- Firebase Configuration -->
+<script>
+  const firebaseConfig = {
+   apiKey: "AIzaSyCbBOjAQ7nrQwPBp6NmixMTSPu28FWvCdI",
+  authDomain: "bloodlink-809d7.firebaseapp.com",
+  databaseURL: "https://bloodlink-809d7-default-rtdb.firebaseio.com",
+  projectId: "bloodlink-809d7",
+  storageBucket: "bloodlink-809d7.firebasestorage.app",
+  messagingSenderId: "189420610064",
+  appId: "1:189420610064:web:349fd00cb372d94e026095",
+  measurementId: "G-GSD3PXZZ8D"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+</script>
+
+</head>
+<body>
+  <h1>🔴 BloodLink - Realtime Donor Finder</h1>
+
+  <section>
+    <h2>🔍 Find a Blood Donor</h2>
+    <label>Blood Group:
+      <select id="bloodGroup">
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+      </select>
+    </label>
+    <label>City:
+      <input type="text" id="city" placeholder="e.g., Delhi" />
+    </label>
+    <button onclick="searchDonors()">Find Donors</button>
+
+    <div id="results"></div>
+   
+  </section>
+
+  <section>
+    <h2>❤️ Want to Help? Become a Donor</h2>
+    <form id="donorForm">
+      <input type="text" id="name" placeholder="Full Name" required />
+      <input type="text" id="regCity" placeholder="City" required />
+      <input type="text" id="state" placeholder="State" required />
+      <input type="text" id="phone" placeholder="Phone Number" required />
+      <select id="regBlood">
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+      </select>
+      <button type="submit">Register</button>
+    </form>
+  </section>
+
+  <script src="app.js"></script>
+  
+</body>
+</html>
