@@ -98,11 +98,11 @@
       e.preventDefault();
 
       const donor = {
-        name: document.getElementById("name").value,
-        phone: document.getElementById("phone").value,
-        city: document.getElementById("city").value.toLowerCase(),
-        state: document.getElementById("state").value,
-        blood: document.getElementById("blood").value
+         name: document.getElementById("name").value,
+  city: document.getElementById("regCity").value.trim().toLowerCase(),  // fix here
+  state: document.getElementById("state").value,
+  phone: document.getElementById("phone").value,
+  blood: document.getElementById("regBlood").value.trim().toUpperCase(),  // fix here
       };
 
       const key = firebase.database().ref().child("donors").push().key;
@@ -114,3 +114,4 @@
   </script>
 </body>
 </html>
+
