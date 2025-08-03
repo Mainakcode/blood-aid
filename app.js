@@ -4,11 +4,12 @@ donorForm.addEventListener("submit", function (e) {
   e.preventDefault();
 
   const donorData = {
-    name: document.getElementById("name").value,
-    city: document.getElementById("regCity").value.toLowerCase(),
-    state: document.getElementById("state").value,
-    phone: document.getElementById("phone").value,
-    blood: document.getElementById("regBlood").value,
+   name: document.getElementById("name").value.trim(),
+city: document.getElementById("regCity").value.trim().toLowerCase(),
+state: document.getElementById("state").value.trim(),
+phone: document.getElementById("phone").value.trim(),
+blood: document.getElementById("regBlood").value.trim().toUpperCase(),
+
   };
 
   const newDonorKey = firebase.database().ref().child("donors").push().key;
@@ -55,3 +56,4 @@ function searchDonors() {
     }
   });
 }
+
