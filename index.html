@@ -49,6 +49,85 @@
       color: green;
       font-weight: bold;
     }
+
+    /* style.css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #f4f4f4;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  color: #c62828;
+  margin-bottom: 30px;
+}
+
+section {
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+label, input, select, button {
+  display: block;
+  margin: 10px 0;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+input, select {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 10px;
+  background-color: #c62828;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #b71c1c;
+}
+
+#results {
+  margin-top: 20px;
+}
+
+.donor-card {
+  background: #ffecec;
+  border: 1px solid #ff9a9a;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.donor-card h3 {
+  margin: 0 0 10px 0;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+  label, input, select, button {
+    width: 100%;
+  }
+}
+
+
+
+    
   </style>
 
   <!-- Firebase -->
@@ -112,6 +191,72 @@
       document.getElementById("donorForm").reset();
     });
   </script>
+
+  <script>
+
+    // Donor Registration
+const donorForm = document.getElementById("donorForm");
+donorForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const donorData = {
+   name: document.getElementById("name").value.trim(),
+city: document.getElementById("regCity").value.trim().toLowerCase(),
+state: document.getElementById("state").value.trim(),
+phone: document.getElementById("phone").value.trim(),
+blood: document.getElementById("regBlood").value.trim().toUpperCase(),
+
+  };
+
+  const newDonorKey = firebase.database().ref().child("donors").push().key;
+  firebase.database().ref("donors/" + newDonorKey).set(donorData);
+
+  alert("Donor registered successfully!");
+  donorForm.reset();
+});
+
+// Donor Search
+function searchDonors() {
+  const bloodGroup = document.getElementById("bloodGroup").value;
+  const city = document.getElementById("city").value.toLowerCase();
+  const resultsDiv = document.getElementById("results");
+  resultsDiv.innerHTML = ""; // Clear previous results
+
+  firebase.database().ref("donors").once("value", (snapshot) => {
+    const donors = snapshot.val();
+    let found = false;
+
+    for (let key in donors) {
+      const donor = donors[key];
+
+      // Matching logic: match both city and blood group
+      if (donor.city === city && donor.blood === bloodGroup) {
+        found = true;
+
+        // Create and append each donor card
+        const card = document.createElement("div");
+        card.className = "donor-card";
+        card.innerHTML = `
+          <h3>${donor.name}</h3>
+          <p><strong>City:</strong> ${donor.city}</p>
+          <p><strong>State:</strong> ${donor.state}</p>
+          <p><strong>Phone:</strong> <a href="tel:${donor.phone}">${donor.phone}</a></p>
+          <p><strong>Blood Group:</strong> ${donor.blood}</p>
+        `;
+        resultsDiv.appendChild(card);
+      }
+    }
+
+    if (!found) {
+      resultsDiv.innerHTML = "<p>No donors found. Try a different city or blood group.</p>";
+    }
+  });
+}
+
+
+
+  </script>
 </body>
 </html>
+
 
